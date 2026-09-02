@@ -3,10 +3,7 @@ import bcrypt from "bcryptjs";
 
 const prisma = new PrismaClient();
 
-async function main() {
-  const email = "teacher@example.com";
-  const password = "password123";
-
+async function seedUser(email: string, name: string, password: string, role: "ADMIN" | "TEACHER") {
   const existing = await prisma.user.findUnique({ where: { email } });
   if (existing) {
     console.log(`Seed skipped: ${email} already exists.`);
@@ -14,16 +11,16 @@ async function main() {
   }
 
   const passwordHash = await bcrypt.hash(password, 10);
-  const teacher = await prisma.user.create({
-    data: {
-      name: "ครูตัวอย่าง",
-      email,
-      passwordHash,
-      role: "TEACHER",
-    },
+  const user = await prisma.user.create({
+    data: { name, email, passwordHash, role },
   });
 
-  console.log(`Created sample teacher: ${teacher.email} / password: ${password}`);
+  console.log(`Created ${role.toLowerCase()}: ${user.email} / password: ${password}`);
+}
+
+async function main() {
+  await seedUser("admin@example.com", "ผู้ดูแลระบบ", "adminpassword123", "ADMIN");
+  await seedUser("teacher@example.com", "ครูตัวอย่าง", "password123", "TEACHER");
 }
 
 main()

@@ -1,0 +1,60 @@
+import Link from "next/link";
+import { prisma } from "@/lib/prisma";
+
+export default async function AdminClassesPage() {
+  const classes = await prisma.classRoom.findMany({
+    orderBy: { createdAt: "desc" },
+    include: {
+      teacher: { select: { name: true, email: true } },
+      _count: { select: { members: true, games: true } },
+    },
+  });
+
+  return (
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-2xl font-bold text-slate-900">ห้องเรียนทั้งหมด</h1>
+        <p className="mt-1 text-sm text-slate-500">ทั้งหมด {classes.length} ห้องเรียน จากทุกครู</p>
+      </div>
+
+      <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm">
+        <table className="min-w-full divide-y divide-slate-200 text-sm">
+          <thead className="bg-slate-50 text-left text-xs font-medium uppercase text-slate-500">
+            <tr>
+              <th className="px-4 py-2">ห้องเรียน</th>
+              <th className="px-4 py-2">ครูผู้สอน</th>
+              <th className="px-4 py-2">นักเรียน</th>
+              <th className="px-4 py-2">เกม</th>
+              <th className="px-4 py-2">โค้ด</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-slate-100">
+            {classes.map((c) => (
+              <tr key={c.id}>
+                <td className="px-4 py-2">
+                  <Link href={`/admin/classes/${c.id}`} className="font-medium text-indigo-600 hover:underline">
+                    {c.name}
+                  </Link>
+                </td>
+                <td className="px-4 py-2 text-slate-600">
+                  {c.teacher.name}
+                  <p className="text-xs text-slate-400">{c.teacher.email}</p>
+                </td>
+                <td className="px-4 py-2 text-slate-500">{c._count.members}</td>
+                <td className="px-4 py-2 text-slate-500">{c._count.games}</td>
+                <td className="px-4 py-2 font-mono text-xs text-slate-500">{c.joinCode}</td>
+              </tr>
+            ))}
+            {classes.length === 0 && (
+              <tr>
+                <td colSpan={5} className="px-4 py-6 text-center text-slate-400">
+                  ยังไม่มีห้องเรียนในระบบ
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}

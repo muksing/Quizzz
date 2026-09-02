@@ -7,8 +7,9 @@ export default auth((req) => {
 
   const isTeacherRoute = pathname.startsWith("/teacher");
   const isStudentRoute = pathname.startsWith("/student");
+  const isAdminRoute = pathname.startsWith("/admin");
 
-  if ((isTeacherRoute || isStudentRoute) && !user) {
+  if ((isTeacherRoute || isStudentRoute || isAdminRoute) && !user) {
     const loginUrl = new URL("/login", req.url);
     loginUrl.searchParams.set("callbackUrl", pathname);
     return NextResponse.redirect(loginUrl);
@@ -22,9 +23,13 @@ export default auth((req) => {
     return NextResponse.redirect(new URL("/", req.url));
   }
 
+  if (isAdminRoute && user?.role !== "ADMIN") {
+    return NextResponse.redirect(new URL("/", req.url));
+  }
+
   return NextResponse.next();
 });
 
 export const config = {
-  matcher: ["/teacher/:path*", "/student/:path*"],
+  matcher: ["/teacher/:path*", "/student/:path*", "/admin/:path*"],
 };

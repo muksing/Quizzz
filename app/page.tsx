@@ -6,7 +6,13 @@ export default async function Home() {
   const session = await auth();
 
   if (session?.user) {
-    redirect(session.user.role === "TEACHER" ? "/teacher/dashboard" : "/student/dashboard");
+    const destination =
+      session.user.role === "ADMIN"
+        ? "/admin/dashboard"
+        : session.user.role === "TEACHER"
+        ? "/teacher/dashboard"
+        : "/student/dashboard";
+    redirect(destination);
   }
 
   return (
