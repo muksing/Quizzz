@@ -8,6 +8,7 @@ const GAME_TYPES: { value: string; label: string; desc: string }[] = [
   { value: "LOCATION", label: "Location (GPS)", desc: "ล่าสมบัติตามพิกัด" },
   { value: "IMAGE_TARGET", label: "Image Target", desc: "สแกนภาพ/หนังสือ" },
   { value: "FACE_FILTER", label: "Face Filter", desc: "ฟิลเตอร์บนใบหน้า" },
+  { value: "GESTURE", label: "Gesture Activity", desc: "ตอบคำถามด้วยท่าทางมือหน้ากล้อง" },
 ];
 
 export function CreateGameForm({ classRoomId }: { classRoomId: string }) {

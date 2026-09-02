@@ -3,13 +3,16 @@
 import { useState } from "react";
 import { StationForm, StationFormValue, StationDTO } from "./StationForm";
 
-type GameType = "MARKER" | "LOCATION" | "IMAGE_TARGET" | "FACE_FILTER";
+type GameType = "MARKER" | "LOCATION" | "IMAGE_TARGET" | "FACE_FILTER" | "GESTURE";
 
 const CONTENT_LABEL: Record<string, string> = {
   MODEL_3D: "โมเดล 3D",
   IMAGE: "รูปภาพ",
   TEXT: "ข้อความ",
   QUIZ: "คำถาม",
+  MATCHING: "จับคู่",
+  GROUPING: "จัดกลุ่ม",
+  ORDERING: "เรียงลำดับ",
 };
 
 function toFormValue(s: StationDTO): StationFormValue {
@@ -23,6 +26,7 @@ function toFormValue(s: StationDTO): StationFormValue {
     quizQuestion: s.quizQuestion || "",
     quizOptions: s.quizOptions && s.quizOptions.length > 0 ? s.quizOptions : ["", ""],
     correctOptionIndex: s.correctOptionIndex ?? 0,
+    activityData: s.activityData || {},
   };
 }
 

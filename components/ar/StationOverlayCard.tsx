@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { loadScript } from "@/lib/load-script";
 
-type ContentType = "MODEL_3D" | "IMAGE" | "TEXT" | "QUIZ";
+type ContentType = "MODEL_3D" | "IMAGE" | "TEXT" | "QUIZ" | "MATCHING" | "GROUPING" | "ORDERING";
 
 const OPTION_STYLES = [
   { border: "border-candypink", badge: "bg-candypink text-white" },

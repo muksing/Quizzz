@@ -41,6 +41,7 @@ export default async function EditGamePage({ params }: { params: Promise<{ id: s
           ...s,
           config: s.config as Record<string, unknown>,
           quizOptions: s.quizOptions as string[] | null,
+          activityData: s.activityData as Record<string, unknown> | null,
         }))}
       />
     </div>

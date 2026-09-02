@@ -7,7 +7,7 @@ const createGameSchema = z.object({
   classRoomId: z.string().min(1),
   title: z.string().min(1).max(150),
   description: z.string().max(1000).optional(),
-  type: z.enum(["MARKER", "LOCATION", "IMAGE_TARGET", "FACE_FILTER"]),
+  type: z.enum(["MARKER", "LOCATION", "IMAGE_TARGET", "FACE_FILTER", "GESTURE"]),
 });
 
 export async function POST(req: Request) {

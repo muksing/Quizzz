@@ -8,12 +8,13 @@ const updateStationSchema = z.object({
   title: z.string().min(1).max(150).optional(),
   order: z.number().int().min(0).optional(),
   config: z.record(z.string(), z.any()).optional(),
-  contentType: z.enum(["MODEL_3D", "IMAGE", "TEXT", "QUIZ"]).optional(),
+  contentType: z.enum(["MODEL_3D", "IMAGE", "TEXT", "QUIZ", "MATCHING", "GROUPING", "ORDERING"]).optional(),
   contentUrl: z.string().url().optional().or(z.literal("")),
   textContent: z.string().max(2000).optional().or(z.literal("")),
   quizQuestion: z.string().max(500).optional().or(z.literal("")),
   quizOptions: z.array(z.string().max(200)).max(6).optional(),
   correctOptionIndex: z.number().int().min(0).optional(),
+  activityData: z.record(z.string(), z.any()).optional(),
 });
 
 async function assertOwnership(gameId: string, teacherId: string) {

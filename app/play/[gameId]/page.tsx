@@ -38,6 +38,7 @@ export default async function PlayGamePage({ params }: { params: Promise<{ gameI
           ...s,
           config: s.config as Record<string, unknown>,
           quizOptions: s.quizOptions as string[] | null,
+          activityData: s.activityData as Record<string, unknown> | null,
         }))}
         canRecordProgress={session.user.role === "STUDENT"}
       />

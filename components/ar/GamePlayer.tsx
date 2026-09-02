@@ -6,10 +6,11 @@ import { MarkerARScene } from "./MarkerARScene";
 import { LocationARScene } from "./LocationARScene";
 import { ImageTargetARScene } from "./ImageTargetARScene";
 import { FaceFilterARScene } from "./FaceFilterARScene";
+import { GestureActivityScene } from "./GestureActivityScene";
 import { StationOverlayCard } from "./StationOverlayCard";
 
-type GameType = "MARKER" | "LOCATION" | "IMAGE_TARGET" | "FACE_FILTER";
-type ContentType = "MODEL_3D" | "IMAGE" | "TEXT" | "QUIZ";
+type GameType = "MARKER" | "LOCATION" | "IMAGE_TARGET" | "FACE_FILTER" | "GESTURE";
+type ContentType = "MODEL_3D" | "IMAGE" | "TEXT" | "QUIZ" | "MATCHING" | "GROUPING" | "ORDERING";
 
 type Station = {
   id: string;
@@ -21,6 +22,7 @@ type Station = {
   quizQuestion: string | null;
   quizOptions: string[] | null;
   correctOptionIndex: number | null;
+  activityData: Record<string, unknown> | null;
 };
 
 export function GamePlayer({
@@ -136,9 +138,20 @@ export function GamePlayer({
             onFound={handleFound}
           />
         )}
+        {gameType === "GESTURE" && (
+          <GestureActivityScene
+            title={station.title}
+            contentType={station.contentType}
+            quizQuestion={station.quizQuestion}
+            quizOptions={station.quizOptions}
+            correctOptionIndex={station.correctOptionIndex}
+            activityData={station.activityData}
+            onComplete={handleStationComplete}
+          />
+        )}
       </div>
 
-      {found && (
+      {found && gameType !== "GESTURE" && (
         <StationOverlayCard
           title={station.title}
           contentType={station.contentType}

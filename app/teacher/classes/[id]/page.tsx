@@ -9,6 +9,7 @@ const TYPE_LABEL: Record<string, string> = {
   LOCATION: "Location (GPS)",
   IMAGE_TARGET: "Image Target",
   FACE_FILTER: "Face Filter",
+  GESTURE: "Gesture Activity",
 };
 
 export default async function ClassDetailPage({

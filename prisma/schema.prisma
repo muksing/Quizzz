@@ -19,6 +19,7 @@ enum GameType {
   LOCATION
   IMAGE_TARGET
   FACE_FILTER
+  GESTURE
 }
 
 enum ContentType {
@@ -26,6 +27,9 @@ enum ContentType {
   IMAGE
   TEXT
   QUIZ
+  MATCHING
+  GROUPING
+  ORDERING
 }
 
 model User {
@@ -92,6 +96,7 @@ model Station {
   quizQuestion       String?
   quizOptions        Json?
   correctOptionIndex Int?
+  activityData       Json?
 
   game Game @relation(fields: [gameId], references: [id], onDelete: Cascade)
 

@@ -7,12 +7,13 @@ import { getOwnedGame } from "@/lib/game-access";
 const createStationSchema = z.object({
   title: z.string().min(1).max(150),
   config: z.record(z.string(), z.any()),
-  contentType: z.enum(["MODEL_3D", "IMAGE", "TEXT", "QUIZ"]),
+  contentType: z.enum(["MODEL_3D", "IMAGE", "TEXT", "QUIZ", "MATCHING", "GROUPING", "ORDERING"]),
   contentUrl: z.string().url().optional().or(z.literal("")),
   textContent: z.string().max(2000).optional(),
   quizQuestion: z.string().max(500).optional(),
   quizOptions: z.array(z.string().max(200)).max(6).optional(),
   correctOptionIndex: z.number().int().min(0).optional(),
+  activityData: z.record(z.string(), z.any()).optional(),
 });
 
 export async function POST(req: Request, { params }: { params: Promise<{ id: string }> }) {
@@ -49,6 +50,7 @@ export async function POST(req: Request, { params }: { params: Promise<{ id: str
       quizQuestion: parsed.data.quizQuestion || null,
       quizOptions: parsed.data.quizOptions ?? undefined,
       correctOptionIndex: parsed.data.correctOptionIndex ?? null,
+      activityData: parsed.data.activityData ?? undefined,
     },
   });
 
