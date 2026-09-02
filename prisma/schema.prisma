@@ -1,0 +1,113 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum Role {
+  TEACHER
+  STUDENT
+}
+
+enum GameType {
+  MARKER
+  LOCATION
+  IMAGE_TARGET
+  FACE_FILTER
+}
+
+enum ContentType {
+  MODEL_3D
+  IMAGE
+  TEXT
+  QUIZ
+}
+
+model User {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  role         Role
+  createdAt    DateTime @default(now())
+
+  classesTaught    ClassRoom[]       @relation("TeacherClasses")
+  classMemberships ClassMembership[]
+  attempts         Attempt[]
+}
+
+model ClassRoom {
+  id        String   @id @default(cuid())
+  name      String
+  joinCode  String   @unique
+  teacherId String
+  createdAt DateTime @default(now())
+
+  teacher User              @relation("TeacherClasses", fields: [teacherId], references: [id], onDelete: Cascade)
+  members ClassMembership[]
+  games   Game[]
+}
+
+model ClassMembership {
+  id          String   @id @default(cuid())
+  userId      String
+  classRoomId String
+  joinedAt    DateTime @default(now())
+
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  classRoom ClassRoom @relation(fields: [classRoomId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, classRoomId])
+}
+
+model Game {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  type        GameType
+  classRoomId String
+  published   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  classRoom ClassRoom @relation(fields: [classRoomId], references: [id], onDelete: Cascade)
+  stations  Station[]
+  attempts  Attempt[]
+}
+
+model Station {
+  id                 String      @id @default(cuid())
+  gameId             String
+  order              Int
+  title              String
+  config             Json
+  contentType        ContentType
+  contentUrl         String?
+  textContent        String?
+  quizQuestion       String?
+  quizOptions        Json?
+  correctOptionIndex Int?
+
+  game Game @relation(fields: [gameId], references: [id], onDelete: Cascade)
+
+  @@unique([gameId, order])
+}
+
+model Attempt {
+  id               String    @id @default(cuid())
+  gameId           String
+  studentId        String
+  startedAt        DateTime  @default(now())
+  completedAt      DateTime?
+  score            Int       @default(0)
+  stationsProgress Json      @default("{}")
+
+  game    Game @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  student User @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@unique([gameId, studentId])
+}
