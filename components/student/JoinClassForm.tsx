@@ -38,22 +38,18 @@ export function JoinClassForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-3">
       <div>
-        <label className="block text-sm font-medium text-slate-700">โค้ดเข้าร่วมห้องเรียน</label>
+        <label className="label-field">โค้ดเข้าร่วมห้องเรียน</label>
         <input
           required
           value={joinCode}
           onChange={(e) => setJoinCode(e.target.value.toUpperCase())}
           placeholder="เช่น AB12CD"
-          className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-center font-mono text-lg tracking-widest focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+          className="input-field text-center font-mono text-lg tracking-widest"
         />
       </div>
-      {error && <p className="text-sm text-red-600">{error}</p>}
-      {success && <p className="text-sm text-emerald-600">{success}</p>}
-      <button
-        type="submit"
-        disabled={loading}
-        className="w-full rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-indigo-500 disabled:opacity-60"
-      >
+      {error && <p className="text-sm text-rose-400">{error}</p>}
+      {success && <p className="text-sm text-candygreen">{success}</p>}
+      <button type="submit" disabled={loading} className="btn-primary w-full">
         {loading ? "กำลังเข้าร่วม..." : "เข้าร่วมห้องเรียน"}
       </button>
     </form>

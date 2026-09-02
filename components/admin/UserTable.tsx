@@ -59,10 +59,10 @@ export function UserTable({ users, currentUserId }: { users: UserRow[]; currentU
 
   return (
     <div className="space-y-3">
-      {error && <p className="text-sm text-red-600">{error}</p>}
-      <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm">
-        <table className="min-w-full divide-y divide-slate-200 text-sm">
-          <thead className="bg-slate-50 text-left text-xs font-medium uppercase text-slate-500">
+      {error && <p className="text-sm text-rose-400">{error}</p>}
+      <div className="overflow-x-auto rounded-2xl border border-white/10 bg-slate-900/80">
+        <table className="min-w-full divide-y divide-white/10 text-sm">
+          <thead className="bg-slate-900 text-left text-xs font-semibold uppercase text-slate-500">
             <tr>
               <th className="px-4 py-2">ชื่อ</th>
               <th className="px-4 py-2">อีเมล</th>
@@ -71,19 +71,19 @@ export function UserTable({ users, currentUserId }: { users: UserRow[]; currentU
               <th className="px-4 py-2"></th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-100">
+          <tbody className="divide-y divide-white/5">
             {users.map((u) => (
               <tr key={u.id}>
-                <td className="px-4 py-2 font-medium text-slate-900">
-                  {u.name} {u.id === currentUserId && <span className="text-xs text-slate-400">(คุณ)</span>}
+                <td className="px-4 py-2 font-medium text-slate-100">
+                  {u.name} {u.id === currentUserId && <span className="text-xs text-slate-500">(คุณ)</span>}
                 </td>
-                <td className="px-4 py-2 text-slate-500">{u.email}</td>
+                <td className="px-4 py-2 text-slate-400">{u.email}</td>
                 <td className="px-4 py-2">
                   <select
                     value={u.role}
                     disabled={busyId === u.id}
                     onChange={(e) => changeRole(u.id, e.target.value as Role)}
-                    className="rounded-lg border border-slate-300 px-2 py-1 text-sm"
+                    className="rounded-lg border border-slate-700 bg-slate-950 px-2 py-1 text-sm text-slate-100"
                   >
                     {(Object.keys(ROLE_LABEL) as Role[]).map((r) => (
                       <option key={r} value={r}>
@@ -92,7 +92,7 @@ export function UserTable({ users, currentUserId }: { users: UserRow[]; currentU
                     ))}
                   </select>
                 </td>
-                <td className="px-4 py-2 text-slate-500">
+                <td className="px-4 py-2 text-slate-400">
                   {u.role === "TEACHER" && `${u.classesTaughtCount} ห้องเรียน`}
                   {u.role === "STUDENT" && `${u.classMembershipsCount} ห้องเรียนที่เข้าร่วม`}
                   {u.role === "ADMIN" && "—"}
@@ -101,7 +101,7 @@ export function UserTable({ users, currentUserId }: { users: UserRow[]; currentU
                   <button
                     disabled={busyId === u.id || u.id === currentUserId}
                     onClick={() => deleteUser(u.id, u.name)}
-                    className="rounded-lg border border-red-200 px-3 py-1 text-xs font-medium text-red-600 hover:bg-red-50 disabled:opacity-40"
+                    className="btn-danger px-3 py-1 text-xs"
                   >
                     ลบ
                   </button>
@@ -110,7 +110,7 @@ export function UserTable({ users, currentUserId }: { users: UserRow[]; currentU
             ))}
             {users.length === 0 && (
               <tr>
-                <td colSpan={5} className="px-4 py-6 text-center text-slate-400">
+                <td colSpan={5} className="px-4 py-6 text-center text-slate-500">
                   ไม่มีผู้ใช้งาน
                 </td>
               </tr>

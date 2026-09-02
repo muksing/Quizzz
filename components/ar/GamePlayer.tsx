@@ -78,22 +78,17 @@ export function GamePlayer({
   }
 
   if (stations.length === 0) {
-    return <p className="p-6 text-center text-slate-500">เกมนี้ยังไม่มีด่าน</p>;
+    return <p className="p-6 text-center text-slate-400">เกมนี้ยังไม่มีด่าน</p>;
   }
 
   if (finished) {
     return (
       <div className="flex flex-1 flex-col items-center justify-center gap-4 p-6 text-center">
         <p className="text-3xl">🎉</p>
-        <h1 className="text-2xl font-bold text-slate-900">เล่นจบแล้ว!</h1>
-        <p className="text-slate-500">{gameTitle}</p>
-        {finalScore !== null && (
-          <p className="text-lg font-semibold text-indigo-600">คะแนน: {finalScore}</p>
-        )}
-        <Link
-          href="/student/dashboard"
-          className="mt-2 rounded-lg bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-indigo-500"
-        >
+        <h1 className="text-2xl font-extrabold text-white">เล่นจบแล้ว!</h1>
+        <p className="text-slate-400">{gameTitle}</p>
+        {finalScore !== null && <p className="text-lg font-bold text-candypink">คะแนน: {finalScore}</p>}
+        <Link href="/student/dashboard" className="btn-primary mt-2">
           กลับไปหน้าห้องเรียน
         </Link>
       </div>
@@ -104,11 +99,11 @@ export function GamePlayer({
 
   return (
     <div className="relative flex-1 overflow-hidden bg-black">
-      <div className="pointer-events-none absolute inset-x-0 top-0 z-10 flex items-center justify-between bg-gradient-to-b from-black/70 to-transparent p-3">
-        <Link href="/student/dashboard" className="pointer-events-auto text-sm font-medium text-white">
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-10 flex items-center justify-between bg-gradient-to-b from-slate-950/80 to-transparent p-3">
+        <Link href="/student/dashboard" className="pointer-events-auto text-sm font-semibold text-white">
           ← ออก
         </Link>
-        <p className="text-sm font-medium text-white">
+        <p className="text-sm font-bold text-candyyellow">
           ด่านที่ {currentIndex + 1} / {stations.length}
         </p>
       </div>

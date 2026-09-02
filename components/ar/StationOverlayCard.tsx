@@ -5,6 +5,13 @@ import { loadScript } from "@/lib/load-script";
 
 type ContentType = "MODEL_3D" | "IMAGE" | "TEXT" | "QUIZ";
 
+const OPTION_STYLES = [
+  { border: "border-candypink", badge: "bg-candypink text-white" },
+  { border: "border-candypurple", badge: "bg-candypurple text-white" },
+  { border: "border-candyblue", badge: "bg-candyblue text-white" },
+  { border: "border-candyyellow", badge: "bg-candyyellow text-slate-950" },
+];
+
 export function StationOverlayCard({
   title,
   contentType,
@@ -34,9 +41,9 @@ export function StationOverlayCard({
   }, [contentType]);
 
   return (
-    <div className="pointer-events-auto absolute inset-x-4 bottom-6 rounded-2xl border border-white/20 bg-white/95 p-5 shadow-xl backdrop-blur">
-      <p className="text-xs font-semibold uppercase tracking-wide text-indigo-600">พบแล้ว!</p>
-      <h3 className="mt-1 text-lg font-bold text-slate-900">{title}</h3>
+    <div className="glass-candy pointer-events-auto absolute inset-x-4 bottom-6 p-5">
+      <p className="text-xs font-bold uppercase tracking-wide text-candypurple">พบแล้ว!</p>
+      <h3 className="mt-1 text-lg font-extrabold text-slate-900">{title}</h3>
 
       {contentType === "TEXT" && textContent && (
         <p className="mt-3 whitespace-pre-wrap text-slate-700">{textContent}</p>
@@ -58,28 +65,32 @@ export function StationOverlayCard({
 
       {contentType === "QUIZ" && quizQuestion && quizOptions && (
         <div className="mt-3 space-y-2">
-          <p className="font-medium text-slate-800">{quizQuestion}</p>
+          <p className="font-bold text-slate-800">{quizQuestion}</p>
           {quizOptions.map((opt, i) => {
             const isCorrect = i === correctOptionIndex;
             const isSelected = i === selected;
+            const style = OPTION_STYLES[i % OPTION_STYLES.length];
             return (
               <button
                 key={i}
                 disabled={answered}
                 onClick={() => setSelected(i)}
-                className={`block w-full rounded-lg border px-3 py-2 text-left text-sm transition ${
+                className={`flex w-full items-center gap-3 rounded-2xl border-[3px] px-3 py-2 text-left text-sm font-semibold transition ${
                   answered && isSelected
                     ? isCorrect
-                      ? "border-emerald-500 bg-emerald-50"
-                      : "border-red-500 bg-red-50"
+                      ? "border-candygreen bg-candygreen/20"
+                      : "border-rose-500 bg-rose-50"
                     : answered && isCorrect
-                    ? "border-emerald-500 bg-emerald-50"
+                    ? "border-candygreen bg-candygreen/20"
                     : isSelected
-                    ? "border-indigo-500 bg-indigo-50"
-                    : "border-slate-200"
+                    ? `${style.border} bg-slate-50`
+                    : `${style.border} bg-white`
                 }`}
               >
-                {opt}
+                <span className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg text-sm font-black ${style.badge}`}>
+                  {i + 1}
+                </span>
+                <span className="text-slate-900">{opt}</span>
               </button>
             );
           })}
@@ -89,26 +100,16 @@ export function StationOverlayCard({
       <div className="mt-4">
         {contentType === "QUIZ" ? (
           answered ? (
-            <button
-              onClick={() => onComplete(selected === correctOptionIndex)}
-              className="w-full rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-500"
-            >
+            <button onClick={() => onComplete(selected === correctOptionIndex)} className="btn-primary w-full">
               ไปด่านถัดไป
             </button>
           ) : (
-            <button
-              disabled={selected === null}
-              onClick={() => setAnswered(true)}
-              className="w-full rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-500 disabled:opacity-50"
-            >
+            <button disabled={selected === null} onClick={() => setAnswered(true)} className="btn-primary w-full">
               ตอบคำถาม
             </button>
           )
         ) : (
-          <button
-            onClick={() => onComplete(true)}
-            className="w-full rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-500"
-          >
+          <button onClick={() => onComplete(true)} className="btn-primary w-full">
             ไปด่านถัดไป
           </button>
         )}

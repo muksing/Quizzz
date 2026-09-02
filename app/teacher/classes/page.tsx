@@ -14,11 +14,11 @@ export default async function TeacherClassesPage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-2xl font-bold text-slate-900">ห้องเรียน</h1>
-        <p className="mt-1 text-sm text-slate-500">สร้างห้องเรียนเพื่อแจกโค้ดให้นักเรียนเข้าร่วม</p>
+        <h1 className="text-2xl font-extrabold text-white">ห้องเรียน</h1>
+        <p className="mt-1 text-sm text-slate-400">สร้างห้องเรียนเพื่อแจกโค้ดให้นักเรียนเข้าร่วม</p>
       </div>
 
-      <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+      <div className="glass-card p-5">
         <CreateClassForm />
       </div>
 
@@ -27,19 +27,19 @@ export default async function TeacherClassesPage() {
           <Link
             key={c.id}
             href={`/teacher/classes/${c.id}`}
-            className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition hover:border-indigo-300 hover:shadow-md"
+            className="glass-card p-5 transition hover:border-candypurple/50"
           >
-            <p className="text-lg font-semibold text-slate-900">{c.name}</p>
-            <p className="mt-1 text-sm text-slate-500">
+            <p className="text-lg font-bold text-slate-100">{c.name}</p>
+            <p className="mt-1 text-sm text-slate-400">
               นักเรียน {c._count.members} คน · เกม {c._count.games} เกม
             </p>
-            <p className="mt-3 inline-block rounded-md bg-indigo-50 px-2 py-1 font-mono text-sm font-semibold text-indigo-700">
+            <p className="mt-3 inline-block rounded-md bg-candypink/15 px-2 py-1 font-mono text-sm font-bold text-candypink">
               {c.joinCode}
             </p>
           </Link>
         ))}
         {classes.length === 0 && (
-          <p className="text-sm text-slate-400">ยังไม่มีห้องเรียน สร้างห้องแรกของคุณด้านบน</p>
+          <p className="text-sm text-slate-500">ยังไม่มีห้องเรียน สร้างห้องแรกของคุณด้านบน</p>
         )}
       </div>
     </div>

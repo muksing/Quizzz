@@ -8,23 +8,23 @@ export default async function StudentLayout({ children }: { children: ReactNode 
 
   return (
     <div className="flex min-h-full flex-1 flex-col">
-      <header className="border-b border-slate-200 bg-white">
+      <header className="border-b border-white/10 bg-slate-900/90 backdrop-blur-md">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
           <div className="flex items-center gap-6">
-            <Link href="/student/dashboard" className="text-lg font-bold text-slate-900">
-              ARGame <span className="text-indigo-600">นักเรียน</span>
+            <Link href="/student/dashboard" className="text-lg font-extrabold text-white">
+              ARGame <span className="text-candyblue">นักเรียน</span>
             </Link>
-            <nav className="flex gap-4 text-sm font-medium text-slate-600">
-              <Link href="/student/dashboard" className="hover:text-indigo-600">
+            <nav className="flex gap-4 text-sm font-semibold text-slate-400">
+              <Link href="/student/dashboard" className="hover:text-candyblue">
                 ห้องเรียนของฉัน
               </Link>
-              <Link href="/student/join" className="hover:text-indigo-600">
+              <Link href="/student/join" className="hover:text-candyblue">
                 เข้าร่วมห้องเรียน
               </Link>
             </nav>
           </div>
           <div className="flex items-center gap-3">
-            <span className="text-sm text-slate-500">{session?.user?.name}</span>
+            <span className="text-sm text-slate-400">{session?.user?.name}</span>
             <SignOutButton />
           </div>
         </div>

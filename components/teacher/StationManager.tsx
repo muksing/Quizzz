@@ -58,12 +58,9 @@ export function StationManager({
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h2 className="text-lg font-semibold text-slate-900">ด่าน ({stations.length})</h2>
+        <h2 className="text-lg font-bold text-white">ด่าน ({stations.length})</h2>
         {editingId === null && (
-          <button
-            onClick={() => setEditingId("new")}
-            className="rounded-lg bg-indigo-600 px-3 py-1.5 text-sm font-semibold text-white hover:bg-indigo-500"
-          >
+          <button onClick={() => setEditingId("new")} className="btn-primary px-3 py-1.5 text-sm">
             + เพิ่มด่าน
           </button>
         )}
@@ -90,26 +87,17 @@ export function StationManager({
               onCancel={() => setEditingId(null)}
             />
           ) : (
-            <div
-              key={station.id}
-              className="flex items-center justify-between rounded-xl border border-slate-200 bg-white p-4 shadow-sm"
-            >
+            <div key={station.id} className="glass-card flex items-center justify-between p-4">
               <div>
-                <p className="text-xs font-semibold text-indigo-600">ด่านที่ {index + 1}</p>
-                <p className="font-medium text-slate-900">{station.title}</p>
-                <p className="text-xs text-slate-400">เนื้อหา: {CONTENT_LABEL[station.contentType]}</p>
+                <p className="text-xs font-bold text-candypink">ด่านที่ {index + 1}</p>
+                <p className="font-semibold text-slate-100">{station.title}</p>
+                <p className="text-xs text-slate-500">เนื้อหา: {CONTENT_LABEL[station.contentType]}</p>
               </div>
               <div className="flex gap-2">
-                <button
-                  onClick={() => setEditingId(station.id)}
-                  className="rounded-lg border border-slate-300 px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-50"
-                >
+                <button onClick={() => setEditingId(station.id)} className="btn-secondary px-3 py-1.5 text-sm">
                   แก้ไข
                 </button>
-                <button
-                  onClick={() => handleDelete(station.id)}
-                  className="rounded-lg border border-red-200 px-3 py-1.5 text-sm text-red-600 hover:bg-red-50"
-                >
+                <button onClick={() => handleDelete(station.id)} className="btn-danger px-3 py-1.5 text-sm">
                   ลบ
                 </button>
               </div>
@@ -117,7 +105,7 @@ export function StationManager({
           )
         )}
         {stations.length === 0 && editingId !== "new" && (
-          <p className="text-sm text-slate-400">ยังไม่มีด่าน กด &quot;เพิ่มด่าน&quot; เพื่อเริ่มสร้าง</p>
+          <p className="text-sm text-slate-500">ยังไม่มีด่าน กด &quot;เพิ่มด่าน&quot; เพื่อเริ่มสร้าง</p>
         )}
       </div>
     </div>

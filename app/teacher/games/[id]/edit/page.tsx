@@ -20,13 +20,10 @@ export default async function EditGamePage({ params }: { params: Promise<{ id: s
   return (
     <div className="space-y-6">
       <div>
-        <Link
-          href={`/teacher/classes/${game.classRoomId}`}
-          className="text-sm text-indigo-600 hover:underline"
-        >
+        <Link href={`/teacher/classes/${game.classRoomId}`} className="text-sm text-candypink hover:underline">
           ← กลับไปที่ห้องเรียน {game.classRoom.name}
         </Link>
-        <h1 className="mt-1 text-2xl font-bold text-slate-900">{game.title}</h1>
+        <h1 className="mt-1 text-2xl font-extrabold text-white">{game.title}</h1>
       </div>
 
       <GameSettingsForm

@@ -8,23 +8,23 @@ export default async function TeacherLayout({ children }: { children: ReactNode 
 
   return (
     <div className="flex min-h-full flex-1 flex-col">
-      <header className="border-b border-slate-200 bg-white">
+      <header className="border-b border-white/10 bg-slate-900/90 backdrop-blur-md">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
           <div className="flex items-center gap-6">
-            <Link href="/teacher/dashboard" className="text-lg font-bold text-slate-900">
-              ARGame <span className="text-indigo-600">ครู</span>
+            <Link href="/teacher/dashboard" className="text-lg font-extrabold text-white">
+              ARGame <span className="text-candypink">ครู</span>
             </Link>
-            <nav className="flex gap-4 text-sm font-medium text-slate-600">
-              <Link href="/teacher/dashboard" className="hover:text-indigo-600">
+            <nav className="flex gap-4 text-sm font-semibold text-slate-400">
+              <Link href="/teacher/dashboard" className="hover:text-candypink">
                 แดชบอร์ด
               </Link>
-              <Link href="/teacher/classes" className="hover:text-indigo-600">
+              <Link href="/teacher/classes" className="hover:text-candypink">
                 ห้องเรียน
               </Link>
             </nav>
           </div>
           <div className="flex items-center gap-3">
-            <span className="text-sm text-slate-500">{session?.user?.name}</span>
+            <span className="text-sm text-slate-400">{session?.user?.name}</span>
             <SignOutButton />
           </div>
         </div>

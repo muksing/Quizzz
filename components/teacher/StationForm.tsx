@@ -115,21 +115,21 @@ export function StationForm({
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 rounded-xl border border-indigo-200 bg-indigo-50/40 p-4">
+    <form onSubmit={handleSubmit} className="space-y-4 rounded-2xl border border-candypurple/30 bg-candypurple/10 p-4">
       <div>
-        <label className="block text-sm font-medium text-slate-700">ชื่อด่าน</label>
+        <label className="label-field">ชื่อด่าน</label>
         <input
           required
           value={value.title}
           onChange={(e) => setValue((v) => ({ ...v, title: e.target.value }))}
-          className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm"
+          className="input-field"
         />
       </div>
 
       {/* Position / trigger config, depends on game type */}
       {gameType === "MARKER" && (
-        <div className="space-y-3 rounded-lg border border-slate-200 bg-white p-3">
-          <p className="text-sm font-semibold text-slate-700">ตำแหน่งมาร์กเกอร์</p>
+        <div className="space-y-3 rounded-xl border border-white/10 bg-slate-900 p-3">
+          <p className="text-sm font-semibold text-slate-200">ตำแหน่งมาร์กเกอร์</p>
           <div className="flex gap-2 text-sm">
             {(["preset", "barcode", "pattern"] as const).map((mode) => (
               <button
@@ -138,8 +138,8 @@ export function StationForm({
                 onClick={() => updateConfig({ markerMode: mode })}
                 className={`rounded-lg border px-3 py-1.5 ${
                   value.config.markerMode === mode
-                    ? "border-indigo-600 bg-indigo-50 text-indigo-700"
-                    : "border-slate-300 text-slate-600"
+                    ? "border-candypurple bg-candypurple/20 text-candypurple"
+                    : "border-slate-700 text-slate-400"
                 }`}
               >
                 {mode === "preset" ? "มาร์กเกอร์สำเร็จรูป" : mode === "barcode" ? "บาร์โค้ด" : "แพทเทิร์นกำหนดเอง"}
@@ -152,7 +152,7 @@ export function StationForm({
               <select
                 value={(value.config.presetType as string) || "hiro"}
                 onChange={(e) => updateConfig({ presetType: e.target.value })}
-                className="rounded-lg border border-slate-300 px-3 py-2 text-sm"
+                className="rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100"
               >
                 <option value="hiro">Hiro</option>
                 <option value="kanji">Kanji</option>
@@ -161,7 +161,7 @@ export function StationForm({
                 href={MARKER_PRESET_IMAGES[(value.config.presetType as "hiro" | "kanji") || "hiro"]}
                 target="_blank"
                 rel="noreferrer"
-                className="ml-3 text-sm text-indigo-600 hover:underline"
+                className="ml-3 text-sm text-candypink hover:underline"
               >
                 ดู/ปริ้นมาร์กเกอร์
               </a>
@@ -170,7 +170,7 @@ export function StationForm({
 
           {value.config.markerMode === "barcode" && (
             <div>
-              <label className="block text-xs text-slate-500">
+              <label className="block text-xs text-slate-400">
                 เลขบาร์โค้ด (0-99) — แต่ละด่านควรใช้เลขไม่ซ้ำกัน
               </label>
               <input
@@ -179,9 +179,9 @@ export function StationForm({
                 max={99}
                 value={(value.config.barcodeValue as number) ?? 0}
                 onChange={(e) => updateConfig({ barcodeValue: Number(e.target.value) })}
-                className="mt-1 w-32 rounded-lg border border-slate-300 px-3 py-2 text-sm"
+                className="input-field mt-1 w-32"
               />
-              <p className="mt-1 text-xs text-slate-400">
+              <p className="mt-1 text-xs text-slate-500">
                 พิมพ์มาร์กเกอร์บาร์โค้ดจากเครื่องมือสร้างมาร์กเกอร์ของ AR.js แล้วปริ้นให้ตรงเลข
               </p>
             </div>
@@ -199,62 +199,62 @@ export function StationForm({
       )}
 
       {gameType === "LOCATION" && (
-        <div className="space-y-3 rounded-lg border border-slate-200 bg-white p-3">
-          <p className="text-sm font-semibold text-slate-700">พิกัด GPS</p>
+        <div className="space-y-3 rounded-xl border border-white/10 bg-slate-900 p-3">
+          <p className="text-sm font-semibold text-slate-200">พิกัด GPS</p>
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs text-slate-500">ละติจูด (lat)</label>
+              <label className="block text-xs text-slate-400">ละติจูด (lat)</label>
               <input
                 type="number"
                 step="any"
                 value={(value.config.lat as number) ?? 0}
                 onChange={(e) => updateConfig({ lat: Number(e.target.value) })}
-                className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm"
+                className="input-field mt-1"
               />
             </div>
             <div>
-              <label className="block text-xs text-slate-500">ลองจิจูด (lng)</label>
+              <label className="block text-xs text-slate-400">ลองจิจูด (lng)</label>
               <input
                 type="number"
                 step="any"
                 value={(value.config.lng as number) ?? 0}
                 onChange={(e) => updateConfig({ lng: Number(e.target.value) })}
-                className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm"
+                className="input-field mt-1"
               />
             </div>
           </div>
           <div>
-            <label className="block text-xs text-slate-500">รัศมีที่ถือว่าถึงจุด (เมตร)</label>
+            <label className="block text-xs text-slate-400">รัศมีที่ถือว่าถึงจุด (เมตร)</label>
             <input
               type="number"
               min={5}
               value={(value.config.radiusMeters as number) ?? 20}
               onChange={(e) => updateConfig({ radiusMeters: Number(e.target.value) })}
-              className="mt-1 w-32 rounded-lg border border-slate-300 px-3 py-2 text-sm"
+              className="input-field mt-1 w-32"
             />
           </div>
-          <p className="text-xs text-slate-400">
+          <p className="text-xs text-slate-500">
             เคล็ดลับ: เปิด Google Maps บนมือถือ กดค้างที่ตำแหน่งจริง แล้วคัดลอกพิกัดมาใส่ที่นี่
           </p>
         </div>
       )}
 
       {gameType === "IMAGE_TARGET" && (
-        <div className="space-y-3 rounded-lg border border-slate-200 bg-white p-3">
-          <p className="text-sm font-semibold text-slate-700">ภาพเป้าหมาย</p>
+        <div className="space-y-3 rounded-xl border border-white/10 bg-slate-900 p-3">
+          <p className="text-sm font-semibold text-slate-200">ภาพเป้าหมาย</p>
           <FileUploadField
             label="อัปโหลดไฟล์ .mind (คอมไพล์จากภาพที่จะให้สแกน)"
             accept=".mind"
             value={(value.config.mindFileUrl as string) || ""}
             onChange={(url) => updateConfig({ mindFileUrl: url })}
           />
-          <p className="text-xs text-slate-400">
+          <p className="text-xs text-slate-500">
             ใช้เครื่องมือคอมไพล์ภาพเป็น .mind ที่{" "}
             <a
               href="https://hiukim.github.io/mind-ar-js-doc/tools/compile"
               target="_blank"
               rel="noreferrer"
-              className="text-indigo-600 hover:underline"
+              className="text-candypink hover:underline"
             >
               MindAR Image Target Compiler
             </a>{" "}
@@ -264,12 +264,12 @@ export function StationForm({
       )}
 
       {gameType === "FACE_FILTER" && (
-        <div className="space-y-3 rounded-lg border border-slate-200 bg-white p-3">
-          <p className="text-sm font-semibold text-slate-700">ตำแหน่งบนใบหน้า</p>
+        <div className="space-y-3 rounded-xl border border-white/10 bg-slate-900 p-3">
+          <p className="text-sm font-semibold text-slate-200">ตำแหน่งบนใบหน้า</p>
           <select
             value={(value.config.anchor as string) || "forehead"}
             onChange={(e) => updateConfig({ anchor: e.target.value })}
-            className="rounded-lg border border-slate-300 px-3 py-2 text-sm"
+            className="rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100"
           >
             {Object.keys(FACE_ANCHORS).map((key) => (
               <option key={key} value={key}>
@@ -281,8 +281,8 @@ export function StationForm({
       )}
 
       {/* Content shown at this station */}
-      <div className="space-y-3 rounded-lg border border-slate-200 bg-white p-3">
-        <p className="text-sm font-semibold text-slate-700">เนื้อหาที่จะแสดง</p>
+      <div className="space-y-3 rounded-xl border border-white/10 bg-slate-900 p-3">
+        <p className="text-sm font-semibold text-slate-200">เนื้อหาที่จะแสดง</p>
         <div className="flex flex-wrap gap-2 text-sm">
           {(["TEXT", "IMAGE", "MODEL_3D", "QUIZ"] as ContentType[]).map((ct) => (
             <button
@@ -291,8 +291,8 @@ export function StationForm({
               onClick={() => setValue((v) => ({ ...v, contentType: ct }))}
               className={`rounded-lg border px-3 py-1.5 ${
                 value.contentType === ct
-                  ? "border-indigo-600 bg-indigo-50 text-indigo-700"
-                  : "border-slate-300 text-slate-600"
+                  ? "border-candypurple bg-candypurple/20 text-candypurple"
+                  : "border-slate-700 text-slate-400"
               }`}
             >
               {ct === "TEXT" ? "ข้อความ" : ct === "IMAGE" ? "รูปภาพ" : ct === "MODEL_3D" ? "โมเดล 3D" : "คำถาม"}
@@ -306,7 +306,7 @@ export function StationForm({
             onChange={(e) => setValue((v) => ({ ...v, textContent: e.target.value }))}
             placeholder="ข้อความที่จะลอยขึ้นมาบนกล้อง"
             rows={3}
-            className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm"
+            className="input-field"
           />
         )}
 
@@ -334,7 +334,7 @@ export function StationForm({
               value={value.quizQuestion}
               onChange={(e) => setValue((v) => ({ ...v, quizQuestion: e.target.value }))}
               placeholder="คำถาม"
-              className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm"
+              className="input-field"
             />
             {value.quizOptions.map((opt, i) => (
               <div key={i} className="flex items-center gap-2">
@@ -343,6 +343,7 @@ export function StationForm({
                   name="correct"
                   checked={value.correctOptionIndex === i}
                   onChange={() => setValue((v) => ({ ...v, correctOptionIndex: i }))}
+                  className="accent-candypink"
                 />
                 <input
                   value={opt}
@@ -353,7 +354,7 @@ export function StationForm({
                     }))
                   }
                   placeholder={`ตัวเลือกที่ ${i + 1}`}
-                  className="flex-1 rounded-lg border border-slate-300 px-3 py-2 text-sm"
+                  className="input-field flex-1"
                 />
               </div>
             ))}
@@ -361,7 +362,7 @@ export function StationForm({
               <button
                 type="button"
                 onClick={() => setValue((v) => ({ ...v, quizOptions: [...v.quizOptions, ""] }))}
-                className="text-sm text-indigo-600 hover:underline"
+                className="text-sm text-candypink hover:underline"
               >
                 + เพิ่มตัวเลือก
               </button>
@@ -370,21 +371,13 @@ export function StationForm({
         )}
       </div>
 
-      {error && <p className="text-sm text-red-600">{error}</p>}
+      {error && <p className="text-sm text-rose-400">{error}</p>}
 
       <div className="flex gap-2">
-        <button
-          type="submit"
-          disabled={saving}
-          className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-500 disabled:opacity-60"
-        >
+        <button type="submit" disabled={saving} className="btn-primary">
           {saving ? "กำลังบันทึก..." : "บันทึกด่าน"}
         </button>
-        <button
-          type="button"
-          onClick={onCancel}
-          className="rounded-lg border border-slate-300 px-4 py-2 text-sm font-medium text-slate-600 hover:bg-slate-50"
-        >
+        <button type="button" onClick={onCancel} className="btn-secondary">
           ยกเลิก
         </button>
       </div>

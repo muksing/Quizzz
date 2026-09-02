@@ -18,27 +18,19 @@ export default async function Home() {
   return (
     <div className="flex flex-1 flex-col items-center justify-center px-6 py-24">
       <div className="w-full max-w-2xl text-center">
-        <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-indigo-600">
-          ARGame
-        </p>
-        <h1 className="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">
+        <p className="mb-3 text-sm font-bold uppercase tracking-wide text-candypink">ARGame</p>
+        <h1 className="text-4xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-candypink via-candypurple to-candyblue sm:text-5xl">
           สร้างเกม AR สำหรับห้องเรียน เปิดกล้องเล่นได้ทันที
         </h1>
-        <p className="mt-6 text-lg text-slate-600">
+        <p className="mt-6 text-lg text-slate-300">
           ครูออกแบบเกม AR ได้หลากหลายรูปแบบ — สแกนมาร์กเกอร์ ล่าสมบัติตามพิกัด GPS
           สแกนภาพเพื่อดูโมเดล 3D หรือฟิลเตอร์ใบหน้า แล้วให้นักเรียนเข้าเล่นผ่านกล้องมือถือ
         </p>
         <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <Link
-            href="/register"
-            className="w-full rounded-lg bg-indigo-600 px-6 py-3 text-base font-semibold text-white shadow-sm transition hover:bg-indigo-500 sm:w-auto"
-          >
+          <Link href="/register" className="btn-primary w-full text-base sm:w-auto">
             เริ่มต้นใช้งาน
           </Link>
-          <Link
-            href="/login"
-            className="w-full rounded-lg border border-slate-300 bg-white px-6 py-3 text-base font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50 sm:w-auto"
-          >
+          <Link href="/login" className="btn-secondary w-full text-base sm:w-auto">
             เข้าสู่ระบบ
           </Link>
         </div>
@@ -51,12 +43,9 @@ export default async function Home() {
           { title: "Image Target", desc: "สแกนภาพ/หนังสือดูโมเดล 3D" },
           { title: "Face Filter", desc: "ฟิลเตอร์ AR บนใบหน้า" },
         ].map((item) => (
-          <div
-            key={item.title}
-            className="rounded-xl border border-slate-200 bg-white p-4 text-left shadow-sm"
-          >
-            <p className="font-semibold text-slate-900">{item.title}</p>
-            <p className="mt-1 text-sm text-slate-500">{item.desc}</p>
+          <div key={item.title} className="glass-card p-4 text-left">
+            <p className="font-semibold text-slate-100">{item.title}</p>
+            <p className="mt-1 text-sm text-slate-400">{item.desc}</p>
           </div>
         ))}
       </div>

@@ -41,17 +41,17 @@ export function FileUploadField({
 
   return (
     <div>
-      <label className="block text-sm font-medium text-slate-700">{label}</label>
+      <label className="label-field">{label}</label>
       <input
         type="file"
         accept={accept}
         onChange={handleFile}
-        className="mt-1 block w-full text-sm text-slate-600 file:mr-3 file:rounded-lg file:border-0 file:bg-indigo-50 file:px-3 file:py-2 file:text-sm file:font-medium file:text-indigo-700 hover:file:bg-indigo-100"
+        className="block w-full text-sm text-slate-400 file:mr-3 file:rounded-lg file:border-0 file:bg-candypurple/20 file:px-3 file:py-2 file:text-sm file:font-semibold file:text-candypurple hover:file:bg-candypurple/30"
       />
-      {uploading && <p className="mt-1 text-xs text-slate-400">กำลังอัปโหลด...</p>}
-      {error && <p className="mt-1 text-xs text-red-600">{error}</p>}
+      {uploading && <p className="mt-1 text-xs text-slate-500">กำลังอัปโหลด...</p>}
+      {error && <p className="mt-1 text-xs text-rose-400">{error}</p>}
       {value && !uploading && (
-        <p className="mt-1 truncate text-xs text-emerald-600">อัปโหลดแล้ว: {value}</p>
+        <p className="mt-1 truncate text-xs text-candygreen">อัปโหลดแล้ว: {value}</p>
       )}
     </div>
   );
